@@ -1,3 +1,6 @@
+# Build full rom
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
+# And all supported languages
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Inherit Infotmic Media Extensions.
@@ -14,9 +17,10 @@ $(call inherit-product, vendor/cyanogen/products/common.mk)
 
 # Overrides
 PRODUCT_NAME := cyanogen_imap2x0
+PRODUCT_BRAND := infotm
 PRODUCT_DEVICE := Imapx2x0
 PRODUCT_MODEL := Generic_Imap
-PRODUCT_MANUFACTURER := infotm
+PRODUCT_MANUFACTURER := InfoTM
 #PRODUCT_POLICY := android.policy_mid
 PRODUCT_POLICY := android.policy_phone
 # Build kernel
@@ -47,14 +51,7 @@ else
     PRODUCT_PROPERTY_OVERRIDES += \
         ro.modversion=CyanogenMod-6.1.0-RC1-glacier
 endif
-# Inherit Infotmic Media Extensions.
-$(call inherit-product, device/infotm/Imapx2x0/Infotmic-MediaExtensions.mk)
-# Inherit Infotmic OpenGL ES. (Vivante)
-$(call inherit-product, device/infotm/Imapx2x0/Infotmic-OpenGLES.mk)
-# Inherit Wifi extensions.
-$(call inherit-product, device/infotm/Imapx2x0/Infotmic-Wifi.mk)
-# include GPS.
-$(call inherit-product, device/infotm/Imapx2x0/Infotmic-gps.mk)
+
 #
 # Copy passion specific prebuilt files
 #
