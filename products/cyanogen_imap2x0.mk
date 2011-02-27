@@ -3,19 +3,19 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
 # And all supported languages
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# Proprietary setup for hardware support
-$(call inherit-product, device/infotm/Imapx2x0/Infotmic-Proprietary.mk)
-# Generic board config
-$(call inherit-product, device/infotm/Imapx2x0/Infotmic-Board-generic.mk)
+# Load Flytouch 2 device setup
+$(call inherit-product, device/infotm/Imapx2x0/Infotmic-flytouch2.mk)
+
 # Inherit some common cyanogenmod stuff.
 $(call inherit-product, vendor/cyanogen/products/common.mk)
 
 # Overrides
-PRODUCT_NAME := cyanogen_imap2x0
+PRODUCT_NAME := cyanogen_flytouch2
 PRODUCT_BRAND := infotm
 PRODUCT_DEVICE := Imapx2x0
-PRODUCT_MODEL := Generic_Imap
-PRODUCT_MANUFACTURER := InfoTM
+PRODUCT_MODEL := Flytouch 2
+PRODUCT_MANUFACTURER := Gome
+# TODO: why not policy_mid ? What's the differenc?
 #PRODUCT_POLICY := android.policy_mid
 PRODUCT_POLICY := android.policy_phone
 # Build kernel - disabled for now, it doesn't boot.
@@ -25,9 +25,9 @@ PRODUCT_POLICY := android.policy_phone
 # Do not build wifi modules - it breaks the cyanogen build because
 # build/core/kernel.mk assumes there's only one *.ko file in 
 # kernel/drivers/net/wireless/*/*.ko.
-# XXX: Fix this by integrating building rt2070sta.ko in the kernel and
-#      disabling all the other modules, and/or submitting a patch to cyanogen
-#      to fix the silly makefile.
+# TODO: Fix this by integrating building rt2070sta.ko in the kernel and
+#       disabling all the other modules, and/or submitting a patch to cyanogen
+#       to fix the silly makefile.
 PRODUCT_SPECIFIC_DEFINES += TARGET_NO_BUILD_WIFI=true
 # In fact, disable module building altogether for now, we depend on at least
 # galcore.ko anyway.
@@ -45,23 +45,10 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGE_OVERLAYS += vendor/cyanogen/overlay/glacier
 
 
-# set Infotmic Properites.
-# media.stagefright.enable-player:
-#   use opencore instead of stagefright, this enabled hw video decoding
-# debug.sf.hw:
-#   Use hardware accelerated GUI (seems to have no effect)
-# opencore.asmd:
-#   Enable hardware video decoding (seems to have no effect)
-# log.redirect-stdio: If true, get stdout/err in logcat, for debugging
+# override some properites.
 PRODUCT_PROPERTY_OVERRIDES += \
-  media.stagefright.enable-player=false \
-	ro.sf.lcd_density=120 \
-	wifi.interface=ra0 \
-	wifi.supplicant_scan_interval=120 \
-	debug.sf.hw=1 \
-	opencore.asmd=1 \
-	debug.sensors.swap_accel=-y,x,z \
-	log.redirect-stdio=false
+	ro.sf.lcd_density=160 \
+	wifi.supplicant_scan_interval=120
 
 #
 # Set ro.modversion
