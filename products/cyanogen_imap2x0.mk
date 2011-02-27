@@ -18,10 +18,20 @@ PRODUCT_MODEL := Generic_Imap
 PRODUCT_MANUFACTURER := InfoTM
 #PRODUCT_POLICY := android.policy_mid
 PRODUCT_POLICY := android.policy_phone
-# Build kernel
-PRODUCT_SPECIFIC_DEFINES += TARGET_PREBUILT_KERNEL=
-PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_DIR=kernel-infotmic
-PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_CONFIG=7901_defconfig
+# Build kernel - disabled for now, it doesn't boot.
+#PRODUCT_SPECIFIC_DEFINES += TARGET_PREBUILT_KERNEL=
+#PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_DIR=kernel-infotmic
+#PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_CONFIG=7901_defconfig
+# Do not build wifi modules - it breaks the cyanogen build because
+# build/core/kernel.mk assumes there's only one *.ko file in 
+# kernel/drivers/net/wireless/*/*.ko.
+# XXX: Fix this by integrating building rt2070sta.ko in the kernel and
+#      disabling all the other modules, and/or submitting a patch to cyanogen
+#      to fix the silly makefile.
+PRODUCT_SPECIFIC_DEFINES += TARGET_NO_BUILD_WIFI=true
+# In fact, disable module building altogether for now, we depend on at least
+# galcore.ko anyway.
+PRODUCT_SPECIFIC_DEFINES += TARGET_PREBUILD_MODULES=true
 
 # Enable Windows Media
 WITH_WINDOWS_MEDIA := true
@@ -36,11 +46,15 @@ PRODUCT_PACKAGES += \
 
 
 # set Infotmic Properites.
-# debug.sf.hw: Use hardware accelerated GUI
-# opencore.asmd: Enable hardware video decoding (untested)
+# media.stagefright.enable-player:
+#   use opencore instead of stagefright, this enabled hw video decoding
+# debug.sf.hw:
+#   Use hardware accelerated GUI (seems to have no effect)
+# opencore.asmd:
+#   Enable hardware video decoding (seems to have no effect)
 # log.redirect-stdio: If true, get stdout/err in logcat, for debugging
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.product.manufacturer=infotm ro.board.platform=imap210 \
+  media.stagefright.enable-player=false \
 	ro.sf.lcd_density=120 \
 	wifi.interface=ra0 \
 	wifi.supplicant_scan_interval=120 \
