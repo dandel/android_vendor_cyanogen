@@ -10,7 +10,7 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/cyanogen_hero.mk \
     $(LOCAL_DIR)/cyanogen_heroc.mk \
     $(LOCAL_DIR)/cyanogen_inc.mk \
-    $(LOCAL_DIR)/cyanogen_imap2x0.mk \
+    $(LOCAL_DIR)/cyanogen_flytouch2.mk \
     $(LOCAL_DIR)/cyanogen_legend.mk \
     $(LOCAL_DIR)/cyanogen_liberty.mk \
     $(LOCAL_DIR)/cyanogen_one.mk \

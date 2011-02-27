@@ -9,7 +9,7 @@ add_lunch_combo cyanogen_harmony-eng
 add_lunch_combo cyanogen_hero-eng
 add_lunch_combo cyanogen_heroc-eng
 add_lunch_combo cyanogen_inc-eng
-add_lunch_combo cyanogen_imap2x0-eng
+add_lunch_combo cyanogen_flytouch2-eng
 add_lunch_combo cyanogen_legend-eng
 add_lunch_combo cyanogen_liberty-eng
 add_lunch_combo cyanogen_one-eng
